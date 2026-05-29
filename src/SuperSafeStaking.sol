@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 contract SuperSafeStaking is ERC20Upgradeable {
-    uint256 public constant APR_BPS = 500; // 5% APR (basis points)
+    uint256 public constant APR_BPS = 1500; // 15% APR (basis points)
 
     address public owner;
     bool    private _initialized;
