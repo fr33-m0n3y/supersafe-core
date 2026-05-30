@@ -6,15 +6,13 @@ import "../src/SuperSafeStaking.sol";
 import "../src/SuperSafeProxy.sol";
 
 contract Deploy is Script {
+    bytes32 constant SALT = keccak256("supersafe-v1");
+
     function run() external {
-        uint256 deployerKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast();
 
-        vm.startBroadcast(deployerKey);
-
-        SuperSafeStaking impl = new SuperSafeStaking();
-
-        SuperSafeProxy proxy = new SuperSafeProxy(address(impl), "");
-
+        SuperSafeStaking impl = new SuperSafeStaking{salt: SALT}();
+        SuperSafeProxy proxy = new SuperSafeProxy{salt: SALT}(address(impl), "");
         SuperSafeStaking(address(proxy)).initialize();
 
         vm.stopBroadcast();

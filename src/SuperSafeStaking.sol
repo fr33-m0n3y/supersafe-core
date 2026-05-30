@@ -7,16 +7,13 @@ contract SuperSafeStaking is ERC20Upgradeable {
     uint256 public constant APR_BPS = 1500; // 15% APR (basis points)
 
     address public owner;
-    bool    private _initialized;
 
     mapping(address => uint256) public stakedAmount;
     mapping(address => uint256) public stakeTimestamp;
 
-    function initialize() external {
-        require(!_initialized, "already initialized");
-        _initialized = true;
-        owner = msg.sender;
+    function initialize() external initializer {
         __ERC20_init("SuperSafe ETH", "SSETH");
+        owner = msg.sender;
     }
 
     // -- Staking --
